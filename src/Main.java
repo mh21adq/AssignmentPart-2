@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        System.out.println("Name class test\n");
+       /* System.out.println("Name class test\n");
         Name firstname = new Name("Numan");
         System.out.println(firstname.getFirstName());
         System.out.println(firstname.getMiddleName());
@@ -26,18 +26,47 @@ public class Main {
         System.out.println(fullName.getFullName());
         System.out.println(fullName.getInitials());
 
-        TennisPlayer tennisPlayer1 = new TennisPlayer("Samir", 30, "Male", "Bd", "Novice");
-        CompetitorList compL = new CompetitorList();
 
-        compL.addCompetitor(tennisPlayer1);
-        TennisPlayer tennisPlayer2 = new TennisPlayer("Numan Hussain", 30, "Male", "Bd", "Novice");
-        compL.addCompetitor(tennisPlayer2);
-        TennisPlayer tennisPlayer3 = new TennisPlayer("Arsal is A", 30, "Male", "Bd", "Novice");
-        compL.addCompetitor(tennisPlayer3);
-        Manager man = new Manager();
-        man.readFromFile("RunCompetitor.csv");
+        Name name = new Name("John Doe");
+
+        // Create a Gamer
+        Gamer gamer = new Gamer(name, "johndoe@example.com", 25, "Male", "USA", LevelInteger.LEVEL_TWO);
         CompetitorList competitorList=new CompetitorList();
-        competitorList.Print();
+        competitorList.addCompetitor(gamer);
+        gamer.setScores(new int[]{80, 90, 95, 87, 88});
+        System.out.println("Gamer Full Details: " + gamer.getFullDetails());
+        System.out.println("Gamer Short Details: " + gamer.getShortDetails());
+        System.out.println("Gamer Category: " + Gamer.getCategory());
+        System.out.println("Gamer Level: " + gamer.getLevel().getLevelValue());
+
+        // Create an IceSkater
+        IceSkater iceSkater = new IceSkater(name, "janedoe@example.com", 22, "Female", "Canada", LevelString.ADVANCED);
+        competitorList.addCompetitor(iceSkater);
+        System.out.println("IceSkater Full Details: " + iceSkater.getFullDetails());
+        System.out.println("IceSkater Short Details: " + iceSkater.getShortDetails());
+        System.out.println("IceSkater Category: " + IceSkater.getCategory());
+        System.out.println("IceSkater Level: " + iceSkater.getLevel().name());
+
+        */
+        Manager manager=new Manager();
+        manager.readFromFile("/Users/mdnumanhussain/Documents/Software Architecture/AssignmentPart-2/src/RunCompetitor.csv");
+        Name name = new Name("John Doe");
+        IceSkater iceSkater = new IceSkater(name, "janedoe@example.com", 22, "Female", "Canada", LevelString.ADVANCED);
+        System.out.println(iceSkater.getCategory());
+        int[] scores = new int[]{1, 2, 3, 4};
+        iceSkater.setScores(scores);
+        System.out.println(iceSkater.getOverallScore(3));
+        System.out.println(iceSkater.getOverallScore());
+        CompetitorList newCompetitorListInstance = new CompetitorList();
+        newCompetitorListInstance.addCompetitor(iceSkater);
+
+        ArrayList<Competitor> competitors = newCompetitorListInstance.getAllCompetitors();
+
+        for (Competitor competitor : competitors) {
+            System.out.println(competitor.getFullDetails());
+        }
+
+
 
 
 

@@ -1,5 +1,24 @@
+public abstract class Competitor {
 
-public  class Competitor {
+    private static int lastNumber = 99;
+
+    private int competitorNumber;
+    private Name name;
+    private String email;
+    private int age;
+    private String gender;
+    private String country;
+    private String level;
+
+    public Competitor(Name name, String email, int age, String gender, String country) {
+        this.competitorNumber = lastNumber++;
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.gender = gender;
+        this.country = country;
+    }
+
     public int getCompetitorNumber() {
         return competitorNumber;
     }
@@ -8,46 +27,36 @@ public  class Competitor {
         this.competitorNumber = competitorNumber;
     }
 
-    private  int competitorNumber;
-    private Name name;
-    private int age;
-    String gender;
+    public String getName() {
+        return this.name.getFullName();
+    }
 
-    private String country;
-    private String level;
-    private static int lastNumber = 99;
+    public void setName(Name name) {
+        this.name = name;
+    }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public int getAge() {
+        return age;
+    }
 
-    public Competitor(String name, int age,String gender, String country)
-    {
-        this.competitorNumber=lastNumber++;
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-        this.age=age;
-        this.gender=gender;
-        this.country=country;
-        //this.level=level;
-        String[] parts = name.split("\\s+");
+    public String getGender() {
+        return gender;
+    }
 
-
-        switch (parts.length) {
-            case 1: // Only first name is provided
-                this.name = new Name(parts[0]);
-                break;
-            case 2: // First and last names are provided
-                this.name = new Name(parts[0], parts[1]);
-                break;
-            case 3: // First, middle, and last names are provided
-                this.name = new Name(parts[0], parts[1], parts[2]);
-                break;
-            default:
-                break;
-        }
-
-
-
-
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getCountry() {
@@ -62,41 +71,26 @@ public  class Competitor {
 
 
 
-    public String getName() {
-        return this.name.getFullName();
+    public abstract double getOverallScore() ;
+    public abstract void setScores(int[] scores);
+
+    public String getFullDetails() {
+        String details = "Competitor Number: " + this.competitorNumber +
+                "\nName: " + this.name.getFullName() +
+                "\nEmail:"+this.email+
+                "\nAge:"+this.age+
+                "\nGander:"+this.gender+
+                "\nCountry: " + this.getCountry() ;
+        return details;
     }
 
-    public void setName(Name name) {
-        this.name = name;
+    public String getShortDetails() {
+        String shortDetails = "CN " + this.competitorNumber +
+                " (" + name.getInitials() + ")" +
+                " has an overall score of " + this.getOverallScore();
+        return shortDetails;
     }
 
-//    public String getLevel() {
-//        return level;
-//    }
-//
-//    public void setLevel(String level) {
-//        this.level = level;
-//    }
-    public int getAge() {
-   return this.age;
     }
 
-    //Main methods starting from here
-    public double getOverallScore() { return 5; }
-    public String getFullDetails()
-    {
-       String ss= "Competitor Number:"+ this.competitorNumber+"\nName:" +this.name.getFullName()+"\nCountry:" +this.getCountry()+
-            "\n"+name.getFirstName() +" is a  aged "+ this.getAge()+" and has an overall score of " +this.getOverallScore();
-       return ss;
-    }
-    public String getShortDetails()
-    {
-        String ss="CN "+this.competitorNumber+ "("+name.getInitials()+")"+ " has overall score"+ this.getOverallScore();
-        return ss;
-    }
 
-    public  double getOverallScore(int top)
-    {
-        return 0;
-    }
-}

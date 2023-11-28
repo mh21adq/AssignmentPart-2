@@ -1,26 +1,23 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class CompetitorList {
-    private ArrayList<Competitor> competitors;
-
-    public CompetitorList() {
-        this.competitors = new ArrayList<>();
-    }
+    private static ArrayList<Competitor> competitors = new ArrayList<>();
 
     // Method to add a competitor
     public void addCompetitor(Competitor competitor) {
-        this.competitors.add(competitor);
+        CompetitorList.competitors.add(competitor);
     }
 
-    public ArrayList<Competitor> getCompetitors() {
-        return competitors;
+    // Method to remove a competitor
+    public void removeCompetitor(Competitor competitor) {
+        CompetitorList.competitors.remove(competitor);
     }
-    public void Print()
-    {
-        for (Competitor com:this.competitors) {
-            System.out.println("Hi");
 
-        }
+    // Method to get all competitors
+    public static ArrayList<Competitor> getAllCompetitors() {
+        return new ArrayList<>(CompetitorList.competitors);
     }
-    // Other methods for reporting and statistics...
+
+    // Other methods...
 }
