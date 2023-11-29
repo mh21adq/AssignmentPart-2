@@ -75,12 +75,16 @@ public abstract class Competitor {
     public abstract void setScores(int[] scores);
 
     public String getFullDetails() {
-        String details = "Competitor Number: " + this.competitorNumber +
+       /* String details = "\n*****************************************************\n"+
+                "Competitor Number: " + this.competitorNumber +
                 "\nName: " + this.name.getFullName() +
                 "\nEmail:"+this.email+
                 "\nAge:"+this.age+
                 "\nGander:"+this.gender+
-                "\nCountry: " + this.getCountry() ;
+                "\nCountry: " + this.getCountry() ;*/
+        String details="\n*****************************************************\n"+
+                "Competitor Number "+ this.competitorNumber+",name "+this.name.getFullName() +",country " +this.getCountry()+".\n"+
+                this.name.getFirstName()+" is a "+this.getLevel()+ " aged "+this.getAge()+".";
         return details;
     }
 
@@ -90,6 +94,8 @@ public abstract class Competitor {
                 " has an overall score of " + this.getOverallScore();
         return shortDetails;
     }
+   public abstract String getCategory();
+    public abstract Level getLevel();
 
     }
 

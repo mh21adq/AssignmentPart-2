@@ -1,21 +1,22 @@
 public class Gamer extends Competitor {
 
     private int[] scores;
-    private LevelInteger level;
+    private Level level;
     private   String category ;
 
-    public Gamer(Name name, String email, int age, String gender, String country, LevelInteger level) {
+    public Gamer(Name name, String email, int age, String gender, String country, Level level) {
         super(name, email, age, gender, country);
         this.level = level;
-        this.category = "ELECTRONICGAMER";
+        this.category = "GAMING";
         this.scores = new int[5];
     }
 
-    public LevelInteger getLevel() {
+    public Level getLevel() {
         return level;
     }
 
-    public void setLevel(LevelInteger level) {
+
+    public void setLevel(Level level) {
         this.level = level;
     }
 
@@ -27,8 +28,8 @@ public class Gamer extends Competitor {
 
     @Override
     public String getFullDetails() {
-        String details = super.getFullDetails() + "\nLevel: " + this.level.name() + "\nCategory: " + category
-                +"\nScores:"+this.getScores();
+        String details = super.getFullDetails()
+                +"\nand received these scores :"+this.getScores()+"\nThis gives him an overall score of "+this.getOverallScore();
         return details;
     }
     public String getScores()
@@ -50,7 +51,13 @@ public class Gamer extends Competitor {
 
     @Override
     public double getOverallScore() {
-        return 0;
+        int [] scores=this.scores;
+        double sum=0;
+        for(int i=0;i<scores.length;i++)
+        {
+            sum+=scores[i];
+        }
+        return sum/scores.length;
     }
 
     public void setScores(int[] scores) {
@@ -61,4 +68,6 @@ public class Gamer extends Competitor {
         return this.scores;
     }
     // Additional methods specific to Gamer, if any, can be added here
+
+
 }

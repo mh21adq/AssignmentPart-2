@@ -1,4 +1,6 @@
 
+import jdk.jfr.Category;
+
 import java.io.*;
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -7,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletionException;
+import java.util.Comparator;
 
 public class Manager {
     private CompetitorList competitorList = new CompetitorList();
@@ -32,7 +35,17 @@ public class Manager {
                 String email = data[2].trim();
                 int age = Integer.parseInt(data[3].trim());
                 String gender = data[4].trim();
-                String level = data[5].trim().toUpperCase();
+                String levelString = data[5].trim().toUpperCase(); // Convert to uppercase to match enum constants
+                Level levelEnum;
+
+                try {
+                    levelEnum = Level.valueOf(levelString);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid level: " + levelString);
+                    // Handle the invalid level case, maybe set a default value or throw an exception
+                    levelEnum = Level.BEGINNER; // Example of setting a default value
+                }
+
                 String category = data[6].trim();
                 String country = data[7].trim();
                 // Scores start from the 8th index, parse until the end of the array
@@ -46,16 +59,9 @@ public class Manager {
                     }
                 }
 
-                if (category.toUpperCase().equals("ICESKATING"))
+                if (category.toUpperCase().equals("ICE SKATING"))
                 {
-                    LevelString levelEnum;
 
-                    try {
-                        levelEnum = LevelString.valueOf(level);
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid level: " + level);
-                        levelEnum = LevelString.BEGINNER; // Example of setting a default value
-                    }
                     IceSkater iceSkater=new IceSkater(name,email,age,gender,country,levelEnum);
                     iceSkater.setCompetitorNumber(competitorNumber);
                     iceSkater.setScores(scores);
@@ -63,10 +69,8 @@ public class Manager {
 
 
                 }
-                else if(category.toUpperCase().equals("ELECTRONICGAMER")){
-                    int levelInt=Integer.parseInt(level);
-                    LevelInteger levelInteger=this.convertIntToLevelInteger(levelInt);
-                    Gamer gamer=new Gamer(name,email,age,gender,country,levelInteger);
+                else if(category.toUpperCase().equals("GAMING")){
+                    Gamer gamer=new Gamer(name,email,age,gender,country,levelEnum);
                     gamer.setCompetitorNumber(competitorNumber);
                     gamer.setScores(scores);
                     competitorList.addCompetitor(gamer);
@@ -126,6 +130,41 @@ public void Print()
         }
         throw new IllegalArgumentException("Invalid level integer: " + levelInt);
     }
+    public void printCompetitorsTable() {
+        CompetitorList newCompetitorListInstance = new CompetitorList();
+        ArrayList<Competitor> iceSkaters=newCompetitorListInstance.getCompetitorsByCategory("ICE SKATING");
+        for (Competitor competitor : iceSkaters) {
+            System.out.println("#########################Ice Skaters#########################\n"+
+                    competitor.getFullDetails());
+        }
 
+        ArrayList<Competitor> gamers=newCompetitorListInstance.getCompetitorsByCategory("ICE SKATING");
+        for (Competitor competitor : gamers) {
+            System.out.println("#########################Electronic Gamer#########################\n"+
+                    competitor.getFullDetails());
+        }
+    }
+    public void highestScoringCompetitor(String category,Level level)
+    {
+        CompetitorList newCompetitorListInstance = new CompetitorList();
+        ArrayList<Competitor> competitorsInLevel=newCompetitorListInstance.searchCompetitorsByLevel("ICE SKATING",level);
+        competitorsInLevel.sort(Comparator.comparingDouble(Competitor::getOverallScore).reversed());
+        System.out.println(competitorsInLevel.get(0).getFullDetails());
+    }
+    public void searchCompetitor(int id)
+    {
+        CompetitorList competitorList = new CompetitorList();
+        Competitor competitorIs=competitorList.getCompetitor(id);
+        if(competitorIs==null)
+        {
+            System.out.println("\nInvalid Competitor Number");
+        }
+        else
+        {
+            System.out.println(competitorIs.getShortDetails());
+        }
+
+
+    }
 }
 

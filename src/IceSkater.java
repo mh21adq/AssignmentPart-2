@@ -1,21 +1,22 @@
 import java.util.Arrays;
 public class IceSkater extends Competitor {
     private int[] scores;
-    private LevelString level;
+    private Level level;
     private   String category ;
 
-    public IceSkater(Name name, String email, int age, String gender, String country, LevelString level) {
+    public IceSkater(Name name, String email, int age, String gender, String country, Level level) {
         super(name, email, age, gender, country);
         this.level = level;
-        this.category = "ICESKATTING";
+        this.category = "ICE SKATING";
         this.scores = new int[4];
     }
 
-    public LevelString getLevel() {
+    public Level getLevel() {
         return level;
     }
 
-    public void setLevel(LevelString level) {
+
+    public void setLevel(Level level) {
         this.level = level;
     }
 
@@ -27,8 +28,7 @@ public class IceSkater extends Competitor {
 
     @Override
     public String getFullDetails() {
-        String details = super.getFullDetails() + "\nLevel: " + this.level.name() + "\nCategory: " + category
-                +"\nScores:"+this.getScores()+"\nOverall Score:"+this.getOverallScore(3);
+        String details = super.getFullDetails()+"\nand received these scores :"+this.getScores()+"\nThis gives him an overall score of "+this.getOverallScore(3);
         return details;
     }
 public String getScores()
@@ -80,4 +80,5 @@ public String getScores()
         return sum/top;
 
     }
+
 }

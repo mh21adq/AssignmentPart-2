@@ -51,24 +51,31 @@ public class Main {
         Manager manager=new Manager();
         manager.readFromFile("/Users/mdnumanhussain/Documents/Software Architecture/AssignmentPart-2/src/RunCompetitor.csv");
         Name name = new Name("John Doe");
-        IceSkater iceSkater = new IceSkater(name, "janedoe@example.com", 22, "Female", "Canada", LevelString.ADVANCED);
-        System.out.println(iceSkater.getCategory());
+        IceSkater iceSkater = new IceSkater(name, "janedoe@example.com", 22, "Female", "Canada", Level.ADVANCED);
+        //System.out.println(iceSkater.getCategory());
         int[] scores = new int[]{1, 2, 3, 4};
         iceSkater.setScores(scores);
-        System.out.println(iceSkater.getOverallScore(3));
-        System.out.println(iceSkater.getOverallScore());
+        //System.out.println(iceSkater.getOverallScore(3));
+       // System.out.println(iceSkater.getOverallScore());
         CompetitorList newCompetitorListInstance = new CompetitorList();
-        newCompetitorListInstance.addCompetitor(iceSkater);
+        //newCompetitorListInstance.addCompetitor(iceSkater);
 
-        ArrayList<Competitor> competitors = newCompetitorListInstance.getAllCompetitors();
-
-        for (Competitor competitor : competitors) {
-            System.out.println(competitor.getFullDetails());
-        }
+       ArrayList<Competitor> iceSkaters=newCompetitorListInstance.searchCompetitorsByLevel("GAMING",Level.BEGINNER);
+      //manager.printCompetitorsTable();
 
 
 
+       for (Competitor competitor : iceSkaters) {
+          System.out.println(competitor.getFullDetails());
+      }
 
+        //manager.printCompetitorsTable();
+
+
+
+manager.highestScoringCompetitor("GAMING",Level.BEGINNER);
+
+       manager.searchCompetitor(100);
 
     }
 }

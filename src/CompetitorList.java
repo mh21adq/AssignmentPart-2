@@ -15,9 +15,50 @@ public class CompetitorList {
     }
 
     // Method to get all competitors
-    public static ArrayList<Competitor> getAllCompetitors() {
+    public  ArrayList<Competitor> getAllCompetitors() {
         return new ArrayList<>(CompetitorList.competitors);
     }
+    public ArrayList<Competitor> getCompetitorsByCategory(String category)
+    {
 
+
+        ArrayList<Competitor> comepetitors=new ArrayList<>();
+        for(Competitor competitor:this.getAllCompetitors())
+        {
+            if(competitor.getCategory()==category.toUpperCase())
+            {
+                comepetitors.add(competitor);
+            }
+
+        }
+        return comepetitors;
+    }
+    public ArrayList<Competitor> searchCompetitorsByLevel(String category,Level level)
+    {
+
+        ArrayList<Competitor> inCategory= this.getCompetitorsByCategory(category);
+        ArrayList<Competitor> inLevel=new ArrayList<>();
+        for(Competitor competitor:inCategory)
+        {
+            if(competitor.getLevel()==level)
+            {
+                inLevel.add(competitor);
+            }
+
+        }
+        return inLevel;
+    }
+    public Competitor getCompetitor(int id)
+    {
+        Competitor competitorIS=null;
+        for(Competitor competitor:competitors)
+        {
+            if(competitor.getCompetitorNumber()==id)
+            {
+                competitorIS=competitor;
+            }
+        }
+        return competitorIS;
+    }
     // Other methods...
 }
