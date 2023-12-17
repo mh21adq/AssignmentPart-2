@@ -64,14 +64,14 @@ public class Main {
       //manager.printCompetitorsTable();
 
 
-
+/*
        for (Competitor competitor : iceSkaters) {
           System.out.println(competitor.getFullDetails());
       }
 
         //manager.printCompetitorsTable();
 
-
+*/
 
 manager.highestScoringCompetitor("GAMING",Level.BEGINNER);
 

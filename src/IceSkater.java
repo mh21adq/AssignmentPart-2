@@ -44,7 +44,7 @@ public String getScores()
 }
     @Override
     public String getShortDetails() {
-        String shortDetails = super.getShortDetails() + " in category " + category+"Scores:"+this.getScores();
+        String shortDetails = super.getShortDetails() + " in category " + category+" Scores:"+this.getScores();
         return shortDetails;
     }
 
